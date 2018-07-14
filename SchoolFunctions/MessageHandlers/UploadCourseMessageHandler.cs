@@ -1,49 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using SchoolFunctions.Azure;
 using SchoolFunctions.Models;
-using SchoolFunctions.Telemetry;
 
 namespace SchoolFunctions.MessageHandlers
 {
     public class UploadCourseMessageHandler : IMessageHandler
     {
-        private readonly IApplicationInsights _applicationInsight;
-
-        public UploadCourseMessageHandler()
-        {
-            _applicationInsight = new ApplicationInsights();
-        }
+        private IAzureServices _azureServices;
 
         public async Task HandleAsync(ManagementModel message)
         {
-            var telemetry = _applicationInsight.Create();
-
-            try
-            {
-                foreach (var item in message.Courses)
-                {
-                    var appEvent = new Dictionary<string, string>
-                        {
-                            { "Course", item.Course },
-                            { "Lecturer",  item.Lecturer },
-                            { "Quantity", item.Quantity }
-                        };
-
-                    telemetry.TrackEvent(message.MessageType, appEvent);
-                }                
-            }
-            catch (Exception ex)
-            {
-                telemetry.TrackException(ex);
-            }
-            finally
-            {
-                telemetry.Flush();
-
-                // flush is not blocking so wait a bit
-                await Task.Delay(5000);
-            }
+            _azureServices = new AzureServices(message);
+            await _azureServices.CoursesInsertOrMergeAsync();
         }
     }
 }
