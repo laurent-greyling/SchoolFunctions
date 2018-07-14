@@ -1,28 +1,22 @@
-﻿
-using Microsoft.Azure.ServiceBus;
-using SchoolFunctions.MessageHandlers;
+﻿using SchoolFunctions.MessageHandlers;
+using SchoolFunctions.Models;
 using SimpleInjector;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SchoolFunctions.Startup
 {
-    public class Startup
+    public class Startup : IStartup
     {
-        public async Task RunAsync(Message message)
+        public async Task RunAsync(ManagementModel message)
         {
-            var type = message.UserProperties["MessageType"];
-            Type d = Type.GetType($"{type}MessageHandler");
+            var messageType = $"SchoolFunctions.MessageHandlers.{message.MessageType}MessageHandler";
+            Type type = Type.GetType(messageType);
 
-            Container dd = new Container();
-            dd.Register(d);
-            var x = dd.GetAllInstances<IMessageHandler>();
-
-            foreach (var item in x)
-            {
-                await item.HandleAsync(message);
-            }
+            Container container = new Container();
+            container.Register(type);
+            var instance = (IMessageHandler)container.GetInstance(type);
+            await instance.HandleAsync(message);            
         }
     }
 }

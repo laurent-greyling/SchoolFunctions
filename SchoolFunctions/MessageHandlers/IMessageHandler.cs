@@ -1,11 +1,11 @@
-﻿
-using Microsoft.Azure.ServiceBus;
+﻿using Microsoft.Azure.ServiceBus;
+using SchoolFunctions.Models;
 using System.Threading.Tasks;
 
 namespace SchoolFunctions.MessageHandlers
 {
     public interface IMessageHandler
     {
-        Task HandleAsync(Message message);
+        Task HandleAsync(ManagementModel message);
     }
 }

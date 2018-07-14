@@ -1,0 +1,2 @@
+Upload courses
+"{'MessageType': 'UploadCourse', 'Courses': [{ 'Course': 'A', 'Lecturer': 'A', 'Quantity': '30'}, { 'Course': 'B', 'Lecturer': 'B', 'Quantity': '30'}, { 'Course': 'C', 'Lecturer': 'C', 'Quantity': '60'}, { 'Course': 'D', 'Lecturer': 'D', 'Quantity': '10'}, { 'Course': 'E', 'Lecturer': 'E', 'Quantity': '5'}]}"
