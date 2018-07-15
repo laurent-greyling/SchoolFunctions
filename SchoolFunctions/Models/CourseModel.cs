@@ -9,6 +9,7 @@ namespace SchoolFunctions.Models
     {
         public string Course { get; set; }
         public string Lecturer { get; set; }
-        public string Quantity { get; set; }
+        public int MaxQuantity { get; set; }
+        public int Quantity { get; set; }
     }
 }

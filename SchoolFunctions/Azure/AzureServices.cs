@@ -46,13 +46,14 @@ namespace SchoolFunctions.Azure
                 {
                     model.PartitionKey = _managementModel.MessageType;
                     model.RowKey = model.Course.ToLower().Replace(" ", "-");
+                    model.Quantity = 0;
                     batchOperation.InsertOrMerge(model);
 
                     var appEvent = new Dictionary<string, string>
                         {
                             { "Course", model.Course },
                             { "Lecturer",  model.Lecturer },
-                            { "Quantity", model.Quantity }
+                            { "Quantity", model.Quantity.ToString() }
                         };
 
                     _telemetry.TrackEvent(_managementModel.MessageType, appEvent);
