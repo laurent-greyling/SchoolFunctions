@@ -4,7 +4,7 @@ This is a small project to play with Azure Functions. The purpose of this Azure 
 
 ## Uploading Information
 Uploading information such as course or student details are done by sending the below information to a queue. 
-This queue would have been either created manually, ARM template or with your backend APP. For this excersise ot was created manually, but preferably this should be done programatically. 
+This queue would have been either created manually, ARM template or with your backend APP. For this excersise it was created manually, but preferably this should be done programatically. 
 
 ### Courses
 When uploading courses you need the following JSON structure:
@@ -48,7 +48,7 @@ When a student signs up you need the following JSON Structure:
 ```
 
 - __MessageType__ : This will indicate to the function what process it should follow. In This case it should signup a student
--__Details__ : Student details for signup
+- __Details__ : Student details for signup
 
 ### Upload Info and retrieve Info Script
 In general you will send the above information via your own API service to the queue. In this case you can send the information to the queue via the `\Scripts\QueueMessage.psm1`.
@@ -59,9 +59,9 @@ To make this script work:
 - Install-Module AzureRmStorageTable
 - Login-AzureRMAccount -TenantId "your tenant id"
 - Import-Module QueueMessage.psm1 -Force
-- Send-QueueMessage -ResourceGroupName <ResourceGroupName> -UserDetails <your json string>
+- Send-QueueMessage -ResourceGroupName "ResourceGroupName" -UserDetails "your json string"
   - This will upload the info for course or student
-- Retrieve-SignupDetails -Name <Student Name> -Surname <Student Surname> -Course <Course Name>
+- Retrieve-SignupDetails -Name "Student Name" -Surname "Student Surname" -Course "Course Name"
   - This will check if student sighup was success or not and give reason for it
 
 ## The Function
@@ -116,3 +116,7 @@ You can then pin this to your Azure Portal DashBoard and have the following:
 ![image](https://user-images.githubusercontent.com/17876815/42734142-53c2d8b4-883f-11e8-92da-da4ae8b95c46.png)
 
 
+##Some (Obvious) Things to improve
+- Currently using storage queue, would like to use Service Bus queue.
+- Some more backend validation can be done, like checking student details not null or empty
+- Currently write back the student feedback into Signup table. This can be different table or even better back onto a queue for processing
