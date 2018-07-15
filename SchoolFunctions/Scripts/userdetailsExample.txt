@@ -1,3 +1,6 @@
 Upload courses
 "{'MessageType': 'UploadCourse', 'Courses': [{ 'Course': 'A', 'Lecturer': 'A', 'MaxQuantity': 30}, { 'Course': 'B', 'Lecturer': 'B', 'MaxQuantity': 30}, { 'Course': 'C', 'Lecturer': 'C', 'MaxQuantity': 60}, { 'Course': 'D', 'Lecturer': 'D', 'MaxQuantity': 10}, { 'Course': 'E', 'Lecturer': 'E', 'MaxQuantity': 5}]}"
 "{'MessageType': 'UploadCourse', 'Courses': [{ 'Course': 'Awesome Course A', 'Lecturer': 'Awesome A', 'MaxQuantity': 30}, { 'Course': 'Awesome Course B', 'Lecturer': 'Awesome B', 'MaxQuantity': 30}, { 'Course': 'Awesome Course C', 'Lecturer': 'Awesome C', 'MaxQuantity': 60}, { 'Course': 'Awesome Course D', 'Lecturer': 'Awesome D', 'MaxQuantity': 10}, { 'Course': 'Awesome Course E', 'Lecturer': 'Awesome E', 'MaxQuantity': 5}]}"
+
+UploadStudent
+"{'MessageType': 'SignUp', 'Details': { 'Name': 'Laurent', 'Surname': 'Greyling', 'Email': 'laurent.greyling@gmail.com', 'Age': 35, 'Course': 'Awesome Course A' }}"
