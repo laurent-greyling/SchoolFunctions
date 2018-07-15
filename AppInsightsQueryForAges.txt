@@ -1,0 +1,3 @@
+customEvents
+| where name == "SignUp" and customDimensions.Course == 'Awesome Course E'
+| summarize Course = any(tostring(customDimensions.Course)), ['Maximum Age'] = max(toint(customDimensions.Age)), ['Minimum Age'] = min(toint(customDimensions.Age)), ['Average Age'] = avg(toint(customDimensions.Age)) 

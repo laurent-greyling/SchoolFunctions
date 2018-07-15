@@ -18,4 +18,31 @@
     }    
 }
 
+Function Retrieve-SignupDetails{
+    param(
+       [Parameter(Mandatory=$true)][string]$Name,
+       [Parameter(Mandatory=$true)][string]$Surname,
+       [Parameter(Mandatory=$true)][string]$Course
+    )
+
+    $id = $Name.ToLower().Replace(" ","-") + "-" + $Surname.ToLower().Replace(" ", "-") + "-" + $Course.ToLower().Replace(" ", "-")
+    
+    $storageAccountName = "coursematerial"
+    $storageAccount = Get-AzureRmStorageAccount -ResourceGroupName "coursematerial" `
+      -AccountName  "coursematerial" `
+
+    $ctx = $storageAccount.Context
+    $storageTable = Get-AzureStorageTable –Name $tableName –Context $ctx
+
+    $isSuccess = Get-AzureStorageTableRowByColumnName -table $storageTable `
+    -columnName "RowKey" `
+    -value $id `
+    -operator Equal
+
+    Write-Host $isSuccess.Reason -ForegroundColor Green
+}
+
+#Install-Module AzureRmStorageQueue
+#Install-Module AzureRmStorageTable
+
 Export-ModuleMember -Function *-*
