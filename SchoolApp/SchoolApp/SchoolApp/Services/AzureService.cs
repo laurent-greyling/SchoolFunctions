@@ -8,7 +8,7 @@ namespace SchoolApp.Services
 {
     public class AzureService : IAzureService
     {
-        private const string AzureWebJobsStorage = "";
+        private const string AzureWebJobsStorage = "DefaultEndpointsProtocol=https;AccountName=coursematerial;AccountKey=JcbA3acwxVIbGVEQ7rAOYgl6N1viFlFDv3uJtEjUL0dYbzD+GXyysBvhRt7FBseRrAmNxuuidMu/lTS/OiExJg==;EndpointSuffix=core.windows.net";
         private readonly CloudStorageAccount _account;
         private readonly CloudTableClient _client;
         private readonly CloudTable _table;

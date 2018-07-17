@@ -8,12 +8,12 @@
     <StackLayout Padding="5,5,5,5">
         <Label Text="Loading..." IsVisible="{Binding Courses.IsNotCompleted}"/>
         <ContentView IsVisible="{Binding Courses.IsSuccessfullyCompleted}">
-            <ListView ItemsSource="{Binding Courses.Result}" HasUnevenRows="True">
+            <ListView ItemsSource="{Binding Courses.Result}" HasUnevenRows="True" ItemTapped="Sign_Up">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout>
-                                <Label Text="{Binding Course}" />
+                                <Label Text="{Binding Course}" FontSize="Medium" ClassId="{Binding PartitionKey}"/>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
