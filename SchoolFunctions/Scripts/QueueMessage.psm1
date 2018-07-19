@@ -5,7 +5,7 @@
     )
 
     try{
-        $queue = Get-AzureRmStorageQueueQueue -resourceGroup $ResourceGroupName -storageAccountName "coursematerial" -queueName "management"
+        $queue = Get-AzureRmStorageQueueQueue -resourceGroup $ResourceGroupName -storageAccountName "coursedetails" -queueName "management"
         $message = $UserDetails | ConvertFrom-Json
 
         Add-AzureRmStorageQueueMessage -queue $queue -message $UserDetails
