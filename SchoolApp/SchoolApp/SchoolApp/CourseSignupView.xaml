@@ -1,14 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SchoolApp.CourseSignupView">
+             x:Class="SchoolApp.CourseSignupView"
+             xmlns:local="clr-namespace:SchoolApp.Helpers">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <local:NegateBooleanConverter
+                    x:Key="inverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
     <ContentPage.Content>
         <StackLayout Padding="5,5,5,5">
             <StackLayout Orientation="Horizontal">
                 <Label Text="Course:"
                        FontSize="Small"
                        VerticalOptions="CenterAndExpand"/>
-                <Label Text="{Binding Course.Course}"
+                <Label Text="{Binding StudentDetails.Result.Course.Course}"
                        FontSize="Medium"
                        VerticalOptions="CenterAndExpand"/>
             </StackLayout>
@@ -16,7 +23,7 @@
                 <Label Text="Lecturer:"
                        FontSize="Small"
                        VerticalOptions="CenterAndExpand"/>
-                <Label Text="{Binding Course.Lecturer}"
+                <Label Text="{Binding StudentDetails.Result.Course.Lecturer}"
                        FontSize="Medium"
                        VerticalOptions="CenterAndExpand"/>
             </StackLayout>
@@ -24,7 +31,7 @@
                 <Label Text="Capacity:"
                        FontSize="Small"
                        VerticalOptions="CenterAndExpand"/>
-                <Label Text="{Binding Course.MaxQuantity}"
+                <Label Text="{Binding StudentDetails.Result.Course.MaxQuantity}"
                        FontSize="Medium"
                        VerticalOptions="CenterAndExpand"/>
             </StackLayout>
@@ -32,7 +39,7 @@
                 <Label Text="Participants:"
                        FontSize="Small"
                        VerticalOptions="CenterAndExpand"/>
-                <Label Text="{Binding Course.Quantity}"
+                <Label Text="{Binding StudentDetails.Result.Course.Quantity}"
                        FontSize="Medium"
                        VerticalOptions="CenterAndExpand"/>
             </StackLayout>
@@ -46,7 +53,8 @@
             <Entry x:Name="StudentEmail" TextChanged="Validate_Email" Placeholder=""/>
             <Label Text="Age:" FontSize="Small" />
             <Entry x:Name="StudentAge" Keyboard="Numeric"/>
-            <Button Text="SignUp" Clicked="Sign_Up"/>
+            <Label Text="{Binding StudentDetails.Result.Student.Reason}"/>
+            <Button Text="SignUp" Clicked="Sign_Up" IsEnabled="{Binding StudentDetails.Result.Student.IsSuccess, Converter={StaticResource inverter}}}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

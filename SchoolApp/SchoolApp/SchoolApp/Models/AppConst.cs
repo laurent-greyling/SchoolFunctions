@@ -4,5 +4,6 @@
     {
         public const string UploadCourse = "UploadCourse";
         public const string SignUp = "SignUp";
+        public const string ManagementQueue = "management";
     }
 }

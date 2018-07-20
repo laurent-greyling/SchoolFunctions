@@ -1,10 +1,8 @@
-﻿using SchoolApp.Models;
+﻿using Newtonsoft.Json;
+using SchoolApp.Models;
+using SchoolApp.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -14,7 +12,8 @@ namespace SchoolApp
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CourseSignupView : ContentPage
 	{
-        public CourseModel Course { get; set; }
+        public CourseModel _courseModel;
+        public SignUpStudentViewModel StudentDetails { get; set; }
 
         private const string _emailRegex = @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
         @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$";
@@ -22,14 +21,14 @@ namespace SchoolApp
         public CourseSignupView (CourseModel courseModel)
 		{
 			InitializeComponent();
-            Course = courseModel;
-            BindingContext = this;
+            _courseModel = courseModel;
+            StudentDetails = new SignUpStudentViewModel(null, _courseModel, false);
+
+            BindingContext = StudentDetails;
 		}
 
         private void Validate_Email(object sender, TextChangedEventArgs e)
         {
-            
-
             if (string.IsNullOrWhiteSpace(e.NewTextValue))
             {
                 StudentEmail.Placeholder = "Enter Email Here";
@@ -47,7 +46,22 @@ namespace SchoolApp
         {
             if (ValidateStudentInfo())
             {
+                var mgmModel = new ManagementModel
+                {
+                    MessageType = AppConst.SignUp,
+                    Details = new StudentModel
+                    {
+                        Name = StudentName.Text,
+                        Surname = StudentSurname.Text,
+                        Email = StudentEmail.Text,
+                        Age = int.Parse(StudentAge.Text),
+                        Course = StudentDetails.Course.Course
+                    }
+                };
 
+                StudentDetails = new SignUpStudentViewModel(mgmModel, _courseModel, true);
+
+                BindingContext = StudentDetails;
             }
         }
 

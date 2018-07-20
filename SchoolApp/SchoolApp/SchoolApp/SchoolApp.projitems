@@ -20,6 +20,7 @@
       <DependentUpon>CourseSignupView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\NegateBooleanConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\NotifyTaskCompletion.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -31,6 +32,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\AzureService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IAzureService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CourseListViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SignUpStudentViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)CourseSignupView.xaml">

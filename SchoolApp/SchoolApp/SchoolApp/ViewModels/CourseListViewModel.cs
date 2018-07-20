@@ -32,8 +32,6 @@ namespace SchoolApp.ViewModels
         {
             _azureService = new AzureService(AppConst.UploadCourse);
             Courses = new NotifyTaskCompletion<List<CourseModel>>(_azureService.RetreiveCourseEntities());
-
-
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

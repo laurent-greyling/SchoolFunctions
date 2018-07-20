@@ -124,6 +124,7 @@ namespace SchoolFunctions.Azure
             }
             catch (Exception ex)
             {
+                //TODO: If email class throw don't come here, give different message
                 if (courseCapacity != null)
                 {
                     courseCapacity.Quantity--;
